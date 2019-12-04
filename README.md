@@ -1,2 +1,1 @@
-https://zoom.us/j/244455507?pwd=MksyVEpyZUpQZGJYNUI1YmdLTCt3QT09
-
+https://zoom.us/j/979632694?pwd=bUpucTVaYWlMQS81cXVYamVIbHdpQT09
