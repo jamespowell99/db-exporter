@@ -1,2 +1,2 @@
-http://zoom.us/j/12345
+https://zoom.us/j/630941280?pwd=SlRsbHNXM3lmbnFlUTlLNDk0ZlRnUT09
 
