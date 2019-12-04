@@ -22,7 +22,7 @@ public class ExporterService {
     public void export() {
         log.info("exporting...");
 
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from payment_audit.payment_event");
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from schema.table");
 
         if (result.size() > 0) {
             Set<String> headers = result.get(0).keySet();
