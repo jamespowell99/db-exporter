@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class DbExporterApplication implements CommandLineRunner{
 
 	private final ExporterService exporterService;
+	private final MigrationService migrationService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DbExporterApplication.class, args);
@@ -24,6 +25,9 @@ public class DbExporterApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		log.info("...starting...");
 		exporterService.export();
+
+//		migrationService.migrateDampProofers();
+//		migrationService.migrateDomestics();
 
 		//pg
 //		exporterService.doImport("/Users/james/dev/dryhome/dryhome_data/products.csv", "dryhome.products", Arrays.asList("prod_id"));
