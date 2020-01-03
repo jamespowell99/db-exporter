@@ -22,7 +22,7 @@ public class MigrationService {
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
-            sb.append("INSERT INTO dryhomecrm.customer (id, company_name, address_1, address_2, address_3, town, post_code, title, first_name, last_name, tel, mobile, products, interested, paid, notes, jhi_type) VALUES (");
+            sb.append("INSERT INTO dryhomecrm.customer (id, company_name, address_1, address_2, address_3, town, post_code, title, first_name, last_name, tel, mobile, products, jhi_interested, paid, notes, jhi_type) VALUES (");
             sb.append(x.get("ID"));
             sb.append(",");
 
@@ -40,7 +40,6 @@ public class MigrationService {
             sb.append(stringField(x.get("Mobile")));
             sb.append(stringField(x.get("Products")));
 
-//            todo - migrate to enum
             Integer interested = (Integer) x.get("interested");
             if (interested == null || interested.equals(3)) {
                 sb.append("null");
@@ -50,7 +49,7 @@ public class MigrationService {
                         sb.append("'INT'");
                         break;
                     case 2:
-                        sb.append("'D.N.I.'");
+                        sb.append("'DNI'");
                         break;
                     default:
                         throw new RuntimeException("unrecognised interested value: " + interested);
@@ -86,7 +85,7 @@ public class MigrationService {
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
-            sb.append("INSERT INTO dryhomecrm.customer (address_1, address_2, address_3, town, post_code, title, first_name, last_name, tel, mobile, sale_products, interested, paid, notes, jhi_lead, lead_name, lead_tel, lead_mob, status, enquiry_property, enquiry_unit_pq, enquiry_inst_pq, sale_invoice_date, sale_invoice_number, jhi_type) VALUES (");
+            sb.append("INSERT INTO dryhomecrm.customer (address_1, address_2, address_3, town, post_code, title, first_name, last_name, tel, mobile, sale_products, jhi_interested, paid, notes, jhi_lead, lead_name, lead_tel, lead_mob, status, enquiry_property, enquiry_unit_pq, enquiry_inst_pq, sale_invoice_date, sale_invoice_number, jhi_type) VALUES (");
             sb.append(stringField(x.get("Address 1"), "UNKNOWN"));
             sb.append(stringField(x.get("Address 2")));
             sb.append(stringField(x.get("Address3")));
@@ -99,7 +98,6 @@ public class MigrationService {
             sb.append(stringField(x.get("Mobile")));
             sb.append(stringField(x.get("Products")));
 
-//            todo - migrate to enum
             Integer interested = (Integer) x.get("interested");
             if (interested == null || interested.equals(3)) {
                 sb.append("null");
@@ -109,7 +107,7 @@ public class MigrationService {
                         sb.append("'INT'");
                         break;
                     case 2:
-                        sb.append("'D.N.I.'");
+                        sb.append("'DNI'");
                         break;
                     default:
                         throw new RuntimeException("unrecognised interested value: " + interested);
