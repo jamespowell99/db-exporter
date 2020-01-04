@@ -28,6 +28,9 @@ public class DbExporterApplication implements CommandLineRunner{
 
 //		migrationService.migrateDampProofers();
 //		migrationService.migrateDomestics();
+//		migrationService.migrateProducts();
+//		migrationService.migrateDpOrders();
+//		migrationService.migrateDpOrderItems();
 
 		//pg
 //		exporterService.doImport("/Users/james/dev/dryhome/dryhome_data/products.csv", "dryhome.products", Arrays.asList("prod_id"));
