@@ -78,3 +78,21 @@ from dryhome.dp_order_items dpoi, dryhome.products p, dryhome.dp_orders dpo
 where dpoi."Prod_id" = p.prod_id and dpo.order_id = dpoi.order_id
 group by extract(YEAR from "Date"), prod_name order by date_part desc;```
 >>>>>>> Stashed changes
+```
+
+**data importing**
+
+deleting
+```
+echo "delete from dryhomecrm.order_item; delete from dryhomecrm.customer_order; delete from dryhomecrm.product; delete from dryhomecrm.customer;" |  docker exec -i pg-docker psql --u postgres  dryhomecrm
+```
+
+counting
+```
+echo "select count(*) from dryhomecrm.customer; select count(*) from dryhomecrm.product; select count(*) from dryhomecrm.customer_order; select count(*) from dryhomecrm.order_item" |  docker exec -i pg-docker psql --u postgres  dryhomecrm
+```
+
+importing
+```
+ cat data/* |  docker exec -i pg-docker psql --u postgres  dryhomecrm
+```

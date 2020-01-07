@@ -24,13 +24,13 @@ public class DbExporterApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("...starting...");
-		exporterService.export();
+//		exporterService.export();
 
-//		migrationService.migrateDampProofers();
-//		migrationService.migrateDomestics();
-//		migrationService.migrateProducts();
-//		migrationService.migrateDpOrders();
-//		migrationService.migrateDpOrderItems();
+		migrationService.migrateDampProofers();
+		migrationService.migrateDomestics();
+		migrationService.migrateProducts();
+		migrationService.migrateDpOrders();
+		migrationService.migrateDpOrderItems();
 
 		//pg
 //		exporterService.doImport("/Users/james/dev/dryhome/dryhome_data/products.csv", "dryhome.products", Arrays.asList("prod_id"));

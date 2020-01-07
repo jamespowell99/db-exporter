@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class MigrationService {
     private final JdbcTemplate jdbcTemplate;
     public void migrateDampProofers() {
+        log.info("Getting damp proofers");
         List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.Damp_Proofers");
 
 
@@ -77,12 +78,17 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        writeToFile(inserts, "damp_proofers.sql");
+        inserts.add("select setval('dryhomecrm.customer_id_seq', 5000);");
+
+        writeToFile(inserts, "data/01-damp_proofers.sql");
+
+        log.info("done damp proofers");
     }
 
     public void migrateDomestics() {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.domestics order by ID");
+        log.info("Getting domestics");
 
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.domestics order by ID");
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
@@ -185,12 +191,15 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        writeToFile(inserts, "domestics.sql");
+        writeToFile(inserts, "data/02-domestics.sql");
+        log.info("done domestics");
+
     }
 
     public void migrateProducts() {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.products order by prod_id");
+        log.info("Getting products");
 
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.products order by prod_id");
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
@@ -205,12 +214,16 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        writeToFile(inserts, "products.sql");
+        inserts.add("select setval('dryhomecrm.product_id_seq', 10);");
+
+        writeToFile(inserts, "data/03-products.sql");
+        log.info("done products");
     }
 
     public void migrateDpOrders() {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.dp_orders order by order_id desc");
+        log.info("Getting orders");
 
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.dp_orders order by order_id desc");
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
@@ -289,12 +302,17 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        writeToFile(inserts, "customer_orders.sql");
+        inserts.add("select setval('dryhomecrm.customer_order_id_seq', 5000);");
+
+        writeToFile(inserts, "data/04-customer_orders.sql");
+
+        log.info("done orders");
     }
 
     public void migrateDpOrderItems() {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.dp_order_items order by id");
+        log.info("Getting order items");
 
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select * from dbo.dp_order_items order by id");
 
         List<String> inserts = result.stream().map(x -> {
             StringBuilder sb = new StringBuilder();
@@ -328,7 +346,11 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        writeToFile(inserts, "order_items.sql");
+        inserts.add("select setval('dryhomecrm.customer_order_id_seq', 10000);");
+
+        writeToFile(inserts, "data/05-order_items.sql");
+
+        log.info("done order items");
     }
 
     private void writeToFile(List<String> inserts, String filename) {
