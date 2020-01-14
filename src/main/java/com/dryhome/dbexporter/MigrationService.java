@@ -346,7 +346,7 @@ public class MigrationService {
             return sb.toString();
         }).collect(Collectors.toList());
 
-        inserts.add("select setval('dryhomecrm.customer_order_id_seq', 10000);");
+        inserts.add("select setval('dryhomecrm.order_item_id_seq', 10000);");
 
         writeToFile(inserts, "data/05-order_items.sql");
 
