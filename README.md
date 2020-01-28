@@ -1,4 +1,4 @@
-https://zoom.us/j/214215809?pwd=c0NaTk84SXJ4NWc1SzY4OTFZeW9OZz09
+https://zoom.us/j/750235609?pwd=dDZ0aVJscXdxOEtnRVh2RTJ6MitZZz09
 
 **docker notes**
 
